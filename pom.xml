@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>de.conciso.ping</groupId>
+    <artifactId>ping</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>web</module>
+        <module>docker</module>
+        <module>contract-test</module>
+    </modules>
+
+    <properties>
+        <project.java.version>11</project.java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.release>11</maven.compiler.release>
+        <alpine-base-image.version>1.8</alpine-base-image.version>
+        <immutables.version>2.8.7</immutables.version>
+        <resteasy-spring-boot-starter.version>4.5.0.Final</resteasy-spring-boot-starter.version>
+        <docker-maven-plugin.version>0.33.0</docker-maven-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <spring-cloud-contract.version>2.1.3.RELEASE</spring-cloud-contract.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>use222</id>
+            <properties>
+                <spring-cloud-contract.version>2.2.2.RELEASE</spring-cloud-contract.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>de.conciso.ping</groupId>
+                <artifactId>ping-web</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.conciso.ping</groupId>
+                <artifactId>ping-docker</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.immutables</groupId>
+                <artifactId>value</artifactId>
+                <version>${immutables.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-contract-dependencies</artifactId>
+                <version>${spring-cloud-contract.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-spring-boot-starter</artifactId>
+                <version>${resteasy-spring-boot-starter.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>ping</finalName>
+    </build>
+
+</project>
+
